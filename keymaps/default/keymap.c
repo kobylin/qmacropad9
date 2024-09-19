@@ -2,21 +2,23 @@
 
 // Define the keycode, `QK_USER` avoids collisions with existing keycodes
 enum keycodes {
-  KC_CYCLE_LAYERS = QK_USER,
+    KC_CYCLE_LAYERS = QK_USER,
+    KC_SWITCH_LANG,
+    KC_TERM_FIND,
 };
 
 // 1st layer on the cycle
 #define LAYER_CYCLE_START 0
 // Last layer on the cycle
-#define LAYER_CYCLE_END   2
+#define LAYER_CYCLE_END   3
 
 
-#define L_BASE 2
+#define L_BASE 0
 #define L_YOUTUBE 1
-#define L_MOUSE 0
+#define L_MOUSE 2
+#define L_CODE 3
 // F3603D,
 // F360SK,
-// CODE,
 // TERM,
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -38,6 +40,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MS_L, KC_MS_D, KC_MS_R,
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
+    [L_CODE] = LAYOUT_ortho_4x3(
+        KC_ESC, KC_SWITCH_LANG, KC_BSPC,
+        KC_NO, KC_UP, KC_ENT,
+        KC_LEFT, KC_DOWN, KC_RIGHT,
+        KC_NO, KC_NO, KC_CYCLE_LAYERS
+    ),
 };
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
@@ -56,6 +64,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_WH_D);
             }
             break;
+        case L_CODE:
+            if (clockwise) {
+                tap_code(KC_DOWN);
+            } else {
+                tap_code(KC_UP);
+            }
+            break;
+        default:
+            return false;
     }
     return false;
 }
@@ -84,6 +101,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       layer_move(next_layer);
       return false;
 
+    case KC_SWITCH_LANG:
+        if (record->event.pressed) {
+            register_code(KC_LCTL);
+            wait_ms(20);
+            tap_code(KC_SPACE);
+            wait_ms(20);
+            unregister_code(KC_LCTL);
+        }
+        return false;
+
     // Process other keycodes normally
     default:
       return true;
@@ -104,6 +131,9 @@ bool oled_task_user(void) {
             break;
         case L_MOUSE:
             oled_write_P(PSTR("MOUSE\n"), false);
+            break;
+        case L_CODE:
+            oled_write_P(PSTR("CODE\n"), false);
             break;
         default:
             // Or use the write_ln shortcut over adding '\n' to the end of your string
