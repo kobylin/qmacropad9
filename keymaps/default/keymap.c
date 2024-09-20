@@ -4,6 +4,7 @@
 enum keycodes {
     KC_CYCLE_LAYERS = QK_USER,
     KC_SWITCH_LANG,
+    KC_BROWSER_UNDOTAB,
     KC_TERM_FIND,
 };
 
@@ -29,9 +30,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
     [L_YOUTUBE] = LAYOUT_ortho_4x3(
-        KC_1, KC_M, KC_C,
-        KC_J, KC_K, KC_L,
-        KC_7, KC_I, KC_F,
+        LGUI(KC_W), KC_BROWSER_UNDOTAB, LCTL(KC_TAB),
+        KC_LEFT, KC_SPACE, KC_RIGHT,
+        KC_I, KC_C, KC_F,
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
     [L_MOUSE] = LAYOUT_ortho_4x3(
@@ -42,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [L_CODE] = LAYOUT_ortho_4x3(
         KC_ESC, KC_SWITCH_LANG, KC_BSPC,
-        KC_NO, KC_UP, KC_ENT,
+        KC_LSFT, KC_UP, KC_ENT,
         KC_LEFT, KC_DOWN, KC_RIGHT,
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
@@ -108,6 +109,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_code(KC_SPACE);
             wait_ms(20);
             unregister_code(KC_LCTL);
+        }
+        return false;
+
+    case KC_BROWSER_UNDOTAB:
+        if (record->event.pressed) {
+            register_code(KC_LGUI);
+            register_code(KC_LSFT);
+            wait_ms(20);
+            tap_code(KC_T);
+            wait_ms(20);
+            unregister_code(KC_LGUI);
+            unregister_code(KC_LSFT);
         }
         return false;
 
