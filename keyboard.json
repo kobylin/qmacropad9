@@ -9,7 +9,7 @@
     "diode_direction": "COL2ROW",
     "encoder": {
         "rotary": [
-            {"pin_a": "B2", "pin_b": "B6", "resolution": 3}
+            {"pin_a": "B2", "pin_b": "B6", "resolution": 4}
         ]
     },
     "features": {
@@ -19,7 +19,7 @@
         "extrakey": true,
         "nkro": true,
         "oled": true,
-        "rgblight": false
+        "rgblight": true
     },
     "matrix_pins": {
         "cols": ["E6", "B4", "B5"],
@@ -34,7 +34,7 @@
             "snake": true,
             "static_gradient": true
         },
-        "led_count": 6
+        "led_count": 13
     },
     "url": "https://github.com/one_quaker/qmacropad9",
     "usb": {

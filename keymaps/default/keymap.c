@@ -36,15 +36,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
     [L_MOUSE] = LAYOUT_ortho_4x3(
-        KC_BTN1, KC_BTN3, KC_BTN2,
-        KC_WH_D, KC_MS_U , KC_WH_U,
+        KC_BTN1, KC_MS_U, KC_BTN2,
         KC_MS_L, KC_MS_D, KC_MS_R,
+        KC_BTN3, KC_WH_D, KC_WH_U,
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
     [L_CODE] = LAYOUT_ortho_4x3(
-        KC_ESC, KC_SWITCH_LANG, KC_BSPC,
-        KC_LSFT, KC_UP, KC_ENT,
-        KC_LEFT, KC_DOWN, KC_RIGHT,
+        KC_ESC, KC_SWITCH_LANG, KC_D,
+        KC_I, KC_K, KC_O,
+        KC_H, KC_J, KC_L,
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
 };
