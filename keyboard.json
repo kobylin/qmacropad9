@@ -32,6 +32,9 @@
             "rainbow_mood": true,
             "rainbow_swirl": true,
             "snake": true,
+            "knight": true,
+            "christmas": true,
+            "twinkle": true,
             "static_gradient": true
         },
         "led_count": 13

@@ -23,10 +23,16 @@ enum keycodes {
 // TERM,
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    // [L_BASE] = LAYOUT_ortho_4x3(
+    //     KC_1, KC_2, KC_3,
+    //     KC_4, KC_5, KC_6,
+    //     KC_7, KC_8, KC_9,
+    //     KC_NO, KC_NO, KC_CYCLE_LAYERS
+    // ),
     [L_BASE] = LAYOUT_ortho_4x3(
-        KC_1, KC_2, KC_3,
-        KC_4, KC_5, KC_6,
-        KC_7, KC_8, KC_9,
+        RGB_TOG, RGB_MOD, RGB_RMOD,
+        RGB_HUI, RGB_SAI, KC_NO,
+        RGB_HUD, RGB_SAD, KC_NO,
         KC_NO, KC_NO, KC_CYCLE_LAYERS
     ),
     [L_YOUTUBE] = LAYOUT_ortho_4x3(
@@ -51,6 +57,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     switch (get_highest_layer(layer_state)) {
+        case L_BASE:
+            if (clockwise) {
+                rgblight_increase_val();
+            } else {
+                rgblight_decrease_val();
+            }
+            break;
         case L_YOUTUBE:
             if (clockwise) {
                 tap_code(KC_VOLU);
