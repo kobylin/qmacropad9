@@ -1,0 +1,1 @@
+qmk flash -kb one_quaker/qmacropad9 -km default
