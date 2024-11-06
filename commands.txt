@@ -1,1 +1,16 @@
+# Flash firmware
+
 qmk flash -kb one_quaker/qmacropad9 -km default
+
+# Image generation tool
+
+https://joric.github.io/qle/
+
+# Image usage tutorial
+
+https://youtu.be/OJSOEStpPIo?si=MAla1fxCeYdHG7Ul
+
+
+# QMK keys references
+
+https://config.qmk.fm/#/handwired/dactyl_kinesis/LAYOUT
